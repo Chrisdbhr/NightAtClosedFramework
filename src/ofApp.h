@@ -1,6 +1,19 @@
 #pragma once
 
 #include "ofMain.h"
+#include <string>
+#include <vector>
+#include "Scene.h"
+#include "GameConfigs.h"
+#include "GamePlay.h"
+#include "GameMenu.h"
+#include "GameOver.h"
+
+#define GAME_MENU 0
+#define GAME_CONFIG 1
+#define GAME_PLAY 2
+#define GAME_OVER 3
+
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +33,6 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		
 		
 };

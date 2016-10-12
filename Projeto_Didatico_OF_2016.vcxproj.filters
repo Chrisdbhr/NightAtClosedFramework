@@ -7,6 +7,21 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameConfigs.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameMenu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameOver.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GamePlay.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -18,6 +33,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameConfigs.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameMenu.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameOver.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GamePlay.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
