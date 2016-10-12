@@ -1,12 +1,25 @@
-#include "Scene.h"
+#include "GamePlay.h"
 
 
 
-Scene::Scene()
+GamePlay::GamePlay()
+{
+	
+
+}
+
+
+GamePlay::~GamePlay()
 {
 }
 
 
-Scene::~Scene()
+void GamePlay::update()
 {
+
+}
+void GamePlay::draw()
+{
+
+
 }

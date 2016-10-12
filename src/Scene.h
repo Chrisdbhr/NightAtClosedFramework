@@ -3,11 +3,12 @@
 
 class Scene
 {
-protected:
-
 public:
-	
 	Scene();
 	~Scene();
+
+	void update();
+	void draw();
+
 };
 

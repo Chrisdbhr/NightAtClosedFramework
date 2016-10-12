@@ -1,12 +1,21 @@
-#include "Scene.h"
+#include "GameOver.h"
 
 
 
-Scene::Scene()
+GameOver::GameOver()
 {
 }
 
 
-Scene::~Scene()
+GameOver::~GameOver()
 {
+}
+void GameOver::update()
+{
+
+}
+void GameOver::draw()
+{
+
+
 }

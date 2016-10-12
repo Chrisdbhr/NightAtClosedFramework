@@ -1,13 +1,17 @@
 #pragma once
 #include "ofMain.h"
+#include "Scene.h"
 
-class Scene
+class GameMenu : public Scene
 {
-protected:
 
 public:
 	
-	Scene();
-	~Scene();
+	GameMenu();
+	~GameMenu();
+	void update();
+	void draw();
+
+
 };
 
