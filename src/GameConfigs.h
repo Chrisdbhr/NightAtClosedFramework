@@ -1,15 +1,15 @@
 #pragma once
 #include "ofMain.h"
-#include "Scene.h"
+#include "GameManager.h"
 
-class GameConfigs : public Scene
+class GameConfigs 
 {
 
 public:
 	
 	GameConfigs();
 	~GameConfigs();
-	void update();
+	void update(GameManager *game);
 	void draw();
 };
 

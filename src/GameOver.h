@@ -1,15 +1,15 @@
 #pragma once
 #include "ofMain.h"
-#include "Scene.h"
+#include "GameManager.h"
 
-class GameOver : public Scene
+class GameOver
 {
 
 public:
 	
 	GameOver();
 	~GameOver();
-	void update();
+	void update(GameManager *game);
 	void draw();
 };
 

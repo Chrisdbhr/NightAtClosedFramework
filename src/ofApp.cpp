@@ -2,38 +2,46 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	scene = new Scene();
+	ofSetBackgroundColor(0, 0, 0);
+	ofHideCursor();
+
+	gameManager = new GameManager(GAME_MENU); // Tudo comecara no menu
+
 	gameMenu = new GameMenu();
 	gameConfigs = new GameConfigs();
 	gamePlay = new GamePlay();
 	gameOver = new GameOver();
 
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	switch (gameState)
+
+	switch (gameManager->gameState)
 	{
 	case GAME_MENU:
-		gameMenu->update();
+		gameMenu->update(gameManager);
 		break;
 	case GAME_CONFIG:
-		gameConfigs->update();
+		gameConfigs->update(gameManager);
 		break;
 	case GAME_PLAY:
-		gamePlay->update();
+		gamePlay->update(gameManager);
 		break;
 	case GAME_OVER:
-		gameOver->update();
+		gameOver->update(gameManager);
 		break;
 	}
-
-
+	
+	// Se passou por todos os updates e ninguem usou o clique do mouse, anula o BOOL para simular um clique 
+	// ao inves de deixar ligado, pois seria um "SEGURANDO BOTAO DO MOUSE"
+	gameManager->mouseFoiPressionado = false; 
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	switch (gameState)
+	switch (gameManager->gameState)
 	{
 	case GAME_MENU:
 		gameMenu->draw();
@@ -49,6 +57,7 @@ void ofApp::draw(){
 		break;
 	}
 
+	gameManager->draw(); // O que o Game Manager desenhar, será desenhado em todas as cenas, útil para mouse e notificações/conquistas
 }
 
 //--------------------------------------------------------------
@@ -73,6 +82,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+	gameManager->mouseFoiPressionado = true;
 
 }
 

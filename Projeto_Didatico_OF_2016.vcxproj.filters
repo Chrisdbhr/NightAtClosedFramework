@@ -19,7 +19,13 @@
     <ClCompile Include="src\GamePlay.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene.cpp">
+    <ClCompile Include="src\GameManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Transition.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +53,13 @@
     <ClInclude Include="src\GamePlay.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene.h">
+    <ClInclude Include="src\GameManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transition.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
