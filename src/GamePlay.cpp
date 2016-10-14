@@ -1,8 +1,15 @@
 #include "GamePlay.h"
 
-GamePlay::GamePlay()
+GamePlay::GamePlay(GameManager *gm)
 {
+	game = gm;
+	horas.loadFont("cour.ttf", 12, true);
+
 	m_ambient.loadSound("sounds/ambient.mp3");
+	m_sndCameraOff.loadSound("sounds/static.mp3");
+	m_celularSnd.loadSound("sounds/phone.mp3");
+	m_celularSnd.setPan(-0.8f);
+
 	m_bg.loadImage("images/bg_play.png");
 
 	m_camera[0].loadImage("images/camera1.png");
@@ -12,7 +19,6 @@ GamePlay::GamePlay()
 	m_luzVermelha.loadImage("images/luzVermelha.png");
 
 	transicao = new Transition();
-	m_sndCameraOff.loadSound("sounds/static.mp3");
 	// Botoes para clicar e mostrar a imagem da camera
 	m_room[0] = new Button(750, 430, 28, 28, true, ON);
 	m_room[0]->m_online = false;
@@ -23,6 +29,7 @@ GamePlay::GamePlay()
 	m_room[4] = new Button(795, 415, 34, 26, true, ON);
 
 	m_monitor = new Button(819, 461, 12, 12, true, OFF);
+	m_celular = new Button(455, 514, 57, 62, true, OFF);
 
 	// Botoes de ligar e desligar as luzes
 	m_light_room[0] = new Button(745, 345, 11, 11, true, ON);
@@ -31,6 +38,8 @@ GamePlay::GamePlay()
 	m_light_room[3] = new Button(745 + 54, 345, 11, 11, true, OFF);
 	m_light_room[4] = new Button(745 + 72, 345, 11, 11, true, OFF);
 
+	//Monstro
+	monstro = new Monster(3, game);
 }
 
 GamePlay::~GamePlay()
@@ -40,14 +49,60 @@ GamePlay::~GamePlay()
 
 void GamePlay::update(GameManager *game)
 {
+
 	if (m_ambient.isPlaying() == false)
-	{
 		m_ambient.play();
 
+	if (m_celularVoice.isPlaying() == false)
+		if (m_celular->m_online == OFF) // Aqui uso a variavel online para ver se apertou no celular ou nao
+			m_celular->m_estado = OFF;
+
+	game->m_minutos -= ofGetLastFrameTime();
+	if (game->m_minutos < 0)
+	{
+		game->m_horas++;
+		game->m_minutos = DURACAO_DA_NOITE;
+	}
+
+	if (m_celular->m_online == ON)
+	{
+		if (m_celularTempoParaTocar < 0)
+		{
+			m_celular->m_estado == ON ? m_celular->m_estado = OFF : m_celular->m_estado = ON;
+			m_celularTempoParaTocar = 2.6f;
+			if (m_celular->m_estado == ON)
+			{
+				m_celularSnd.play();
+			}
+		}
+		else
+		{
+			m_celularTempoParaTocar -= ofGetLastFrameTime();
+		}
 	}
 
 	if (game->mouseFoiPressionado)
 	{
+
+		if (m_celular->mouseOver())
+		{
+			if (m_celular->m_online == ON) // Aqui uso a variavel online para ver se apertou no celular ou nao
+			{
+				m_celular->m_estado = ON;
+				m_celularSnd.stop();
+				std::string voz;
+				voz.erase();
+				voz.append("sounds/voice");
+				voz.append(ofToString(game->m_night));
+				voz.append(".mp3");
+				m_celularVoice.loadSound(voz);
+				m_celularVoice.setPan(-0.8f);
+				m_celularVoice.play();
+				m_celular->m_online = OFF;
+
+			}
+		}
+
 		if (m_monitor->m_estado == ON)
 		{
 			for (int i = 0; i < 5; i++)
@@ -56,7 +111,7 @@ void GamePlay::update(GameManager *game)
 				{
 					game->m_mousePress.play();
 					m_cameraNaTela = i;
-					m_cameraTempoEfeitoTroca += 0.2f;
+					m_cameraTempoEfeitoTroca = 0.2f;
 				}
 
 			}
@@ -79,7 +134,6 @@ void GamePlay::update(GameManager *game)
 			}
 			for (int i = 1; i < 5; i++)
 			{
-				std::cout << i << std::endl;
 				if (m_light_room[i]->mouseOver())
 				{
 					game->m_mousePress.play();
@@ -91,14 +145,52 @@ void GamePlay::update(GameManager *game)
 		{
 			game->m_mousePress.play();
 			m_monitor->m_estado == ON ? m_monitor->m_estado = OFF : m_monitor->m_estado = ON;
+			m_sndCameraOff.stop();
 		}
 
 	}
+	//-----------------
+	// Monstro
+	//-----------------
+	monstro->update();
+	if (monstro->m_salaAtual == 0 && m_light_room[0]->m_estado == OFF) // se ta na sala do jogador e a luz ta apagada: se fudeu
+	{
+		monstro->m_eMorreu = true;
+	}
 
+	if (m_cameraNaTela == monstro->m_salaAtual)
+	{
+		if (m_light_room[m_cameraNaTela]->m_estado == ON)
+		{
+			m_cameraTempoEfeitoTroca = 0.1f;
+			monstro->m_noise.stop();
+		}
+	}
+	if (game->luzADesligar != 5)
+	{
+		game->m_mousePress.play();
+		m_light_room[game->luzADesligar]->m_estado = OFF;
+		game->luzADesligar = ofRandom(1, 4);
+		m_light_room[game->luzADesligar]->m_estado = OFF;
+		game->luzADesligar = 5;
+	}
+	if (game->cameraADesativar != 5)
+	{
+		m_room[1]->m_online = ON;
+		m_room[2]->m_online = ON;
+		m_room[4]->m_online = ON;
+		m_room[game->cameraADesativar]->m_online = OFF;
+		game->cameraADesativar = 5;
+	}
 }
 
 void GamePlay::draw()
 {
+	if (m_celular->m_estado == ON)
+	{
+		m_celular->draw();
+	}
+
 	if (m_monitor->m_estado == ON)
 	{
 		switch (m_cameraNaTela)
@@ -155,13 +247,38 @@ void GamePlay::draw()
 
 		}
 	}
+	//------------------------------
+	// Monstro
+	//------------------------------
+	//Mostra ele nas cameras
+	if (m_monitor->m_estado == ON)
+	{
+		if (m_cameraNaTela == monstro->m_salaAtual)
+		{
+			if (m_light_room[monstro->m_salaAtual]->m_estado == ON)
+			{
+				if (m_room[m_cameraNaTela]->m_online)
+				{
+					monstro->m_naCamera[monstro->m_salaAtual].draw(0, 0);
+
+				}
+			}
+		}
+	}
+	if (m_light_room[0]->m_estado == ON)
+	{
+		if (monstro->m_salaAtual == 5)
+			monstro->m_naCamera[5].draw(0, 0);
+	}
+
 	if (m_cameraTempoEfeitoTroca > 0)
 	{
 		m_cameraOff();
 		m_cameraTempoEfeitoTroca -= ofGetLastFrameTime();
 	}
-
+	//------------------------------
 	m_bg.draw(0, 0);
+	//------------------------------
 
 	if (m_cameraNaTela == 0)
 	{
@@ -171,6 +288,7 @@ void GamePlay::draw()
 	if (m_monitor->m_estado == ON) // repetindo condicao para desenhar em cima
 	{
 		m_monitorHud.draw(0, 0);
+		horas.drawString(ofToString(game->m_horas), 640, 445);
 		for (int i = 0; i < 5; i++)
 		{
 			m_light_room[i]->draw();
@@ -179,14 +297,20 @@ void GamePlay::draw()
 	}
 
 	m_monitor->draw();
-	transicao->draw();
 
+	//------------------------------
+	transicao->draw();
+	monstro->draw(); // Se precisar desenhar o jumpscare
 }
 
 void GamePlay::m_cameraOff()
 {
 
-	if (m_sndCameraOff.isPlaying() == false)
+	if (m_sndCameraOff.getIsPlaying())
+	{
+		// ué?
+	}
+	else
 	{
 		m_sndCameraOff.play();
 		m_sndCameraOff.setVolume(0.5f);

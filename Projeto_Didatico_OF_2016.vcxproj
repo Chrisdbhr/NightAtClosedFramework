@@ -182,6 +182,7 @@
     <ClCompile Include="src\GameOver.cpp" />
     <ClCompile Include="src\GamePlay.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Monster.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Transition.cpp" />
   </ItemGroup>
@@ -192,6 +193,7 @@
     <ClInclude Include="src\GameMenu.h" />
     <ClInclude Include="src\GameOver.h" />
     <ClInclude Include="src\GamePlay.h" />
+    <ClInclude Include="src\Monster.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Transition.h" />
   </ItemGroup>

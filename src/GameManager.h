@@ -14,6 +14,8 @@
 #define ON true
 #define OFF false
 
+#define DURACAO_DA_NOITE 120 // No caso de cada hora
+
 class GameManager
 {
 
@@ -28,6 +30,11 @@ public:
 
 	int gameState;
 	bool mouseFoiPressionado;
+	int m_night = 1; // Noite que esta, influencia na dificuldade e mensagem do celular
+	int m_horas = 0; // As "horas" vao passando  
+	float m_minutos = DURACAO_DA_NOITE; // "minutos"
+	int luzADesligar = 5; // 5 == nenhuma
+	int cameraADesativar = 5; // 5 == nenhuma
 
 	void update();
 	void draw();  // O que o Game Manager desenhar, será desenhado em todas as cenas, útil para mouse e notificações/conquistas

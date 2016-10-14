@@ -28,6 +28,9 @@
     <ClCompile Include="src\Transition.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Monster.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -60,6 +63,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Transition.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Monster.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

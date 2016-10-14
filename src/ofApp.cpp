@@ -9,7 +9,7 @@ void ofApp::setup(){
 
 	gameMenu = new GameMenu();
 	gameConfigs = new GameConfigs();
-	gamePlay = new GamePlay();
+	gamePlay = new GamePlay(gameManager);
 	gameOver = new GameOver();
 
 }
