@@ -12,7 +12,6 @@ void ofApp::setup(){
 	gamePlay = new GamePlay();
 	gameOver = new GameOver();
 
-
 }
 
 //--------------------------------------------------------------
