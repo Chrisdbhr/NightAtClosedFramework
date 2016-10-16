@@ -16,11 +16,8 @@ void Button::draw()
 			ofSetColor(0);
 			ofDrawRectangle(m_x - (getW() / 2)+1, m_y - (getH() / 2)+1, getW()-2, getH()-2);
 			ofSetColor(255);
-
 		}
-
 	}
-
 }
 
 bool Button::mouseOver()

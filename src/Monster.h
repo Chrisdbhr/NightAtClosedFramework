@@ -9,22 +9,32 @@
 class Monster
 {
 public:
-	Monster::Monster(float dl,  GameManager *gm); // Recebe Delay o GameManager para alterar variaveis Globais.
+	Monster::Monster(float dl,  GameManager *game); // Recebe Delay o GameManager para alterar variaveis Globais.
 
-	ofImage m_naCamera[5]; // Ele aparecendo nas cameras e na janela
+	ofImage m_naCamera[6]; // Ele aparecendo nas cameras e na janela
 	ofImage m_imgJumpscare; //animacao de susto 
 	ofSoundPlayer m_noise;
 	ofSoundPlayer m_jumpscare;
-	int m_salaAtual = 3; // Qual sala esta
-	float m_delay; // Um valor para atrasar o monstro, quanto maior mais fácil
+	int m_salaAtual; // Qual sala esta
+	float m_delay; // Um valor para atrasar o monstro, quanto maior mais lento ele é
 	int m_acao; // IA Maquina de Estados. Cada numero é uma ação
-	bool m_eMorreu = false; // No caso mostrar a jumpscare
-	bool m_kill = false; // Valido para desenhar, se a variavel anterior ta ativada, em algum momento o jogador perde, tempo aleatorio para ficar mais imprevissivel
+	bool m_eMorreu; // No caso mostrar a jumpscare
+	bool m_kill; // Valido para desenhar, se a variavel anterior ta ativada, em algum momento o jogador perde, tempo aleatorio para ficar mais imprevissivel
+
+	int animFrameAtual; //Qual frame da animação esta
+	int animFrameTotal; //Quantos frames tem a animacao 
+	float animTempo; //Contador de tempo decorrido da animacao
+
+	float tempoParaDarGameOver; //Quanto tempo com o monstro na tela para dar GameOver
 
 	void fazerBarulho();
-	void update();
+
+	void update(GameManager *game);
 	void draw();
+	void reset(); // Setar/resetar as variaveis com valores iniciais
 private:
-	GameManager *game;
-	float m_wait = 5.f; // Tempo de espera entre acoes (100.f)
+	float m_wait; // Tempo de espera entre acoes (Deve começar com 100.f para demorar para começar a agir)
+
+
+
 };

@@ -4,7 +4,7 @@
 #include <string>
 #include "GameManager.h"
 #include "GameMenu.h"
-#include "GameConfigs.h"
+#include "GameWin.h"
 #include "GamePlay.h"
 #include "GameOver.h"
 
@@ -30,8 +30,7 @@ public:
 	GameManager *gameManager;  // O pirocudo. Paizao de todos. Manda chuva. O cafetao.
 
 	GameMenu *gameMenu;
-	GameConfigs *gameConfigs;
+	GameWin *gameWin;
 	GamePlay *gamePlay;
 	GameOver *gameOver;
-
 };

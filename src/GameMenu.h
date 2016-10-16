@@ -6,12 +6,12 @@ class GameMenu
 {
 
 public:
-
 	ofImage m_bg;
 	ofImage m_bgImages[4];
+	ofImage m_star;
 	float m_imgShowTime = 0;
 	int m_imgToShow = 1;
-	
+
 	ofSoundPlayer m_snd_music;
 
 	Button *newGame;
@@ -24,8 +24,8 @@ public:
 	~GameMenu();
 
 	void update(GameManager *game);
-	void draw();
-
+	void draw(GameManager *game);
+	void reset();
 
 };
 

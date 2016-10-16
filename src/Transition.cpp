@@ -6,7 +6,6 @@ Transition::Transition()
 
 }
 
-
 void Transition::draw()
 {
 	if (m_duracaoDaTransicao <= 0)
@@ -18,6 +17,7 @@ void Transition::draw()
 	{
 		if (m_snd.isPlaying() == false)
 			m_snd.play();
+
 		int temp;
 		// Desenha os quadrados
 		for (int i = 0; i < 3; i++)
@@ -36,9 +36,8 @@ void Transition::draw()
 		for (int i = 0; i < 2000; i++)
 		{
 			ofSetColor(ofRandom(255));
-			ofDrawRectangle(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(1, 6), ofRandom(1, 6));
+			ofDrawRectangle(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(1, 5), ofRandom(1, 5));
 		}
-
 
 		m_duracaoDaTransicao -= ofGetLastFrameTime();
 		ofSetColor(255);

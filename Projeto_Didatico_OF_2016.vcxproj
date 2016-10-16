@@ -176,7 +176,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp" />
-    <ClCompile Include="src\GameConfigs.cpp" />
+    <ClCompile Include="src\GameWin.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
     <ClCompile Include="src\GameMenu.cpp" />
     <ClCompile Include="src\GameOver.cpp" />
@@ -188,7 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Button.h" />
-    <ClInclude Include="src\GameConfigs.h" />
+    <ClInclude Include="src\GameWin.h" />
     <ClInclude Include="src\GameManager.h" />
     <ClInclude Include="src\GameMenu.h" />
     <ClInclude Include="src\GameOver.h" />

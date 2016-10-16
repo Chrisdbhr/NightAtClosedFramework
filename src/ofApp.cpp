@@ -8,10 +8,10 @@ void ofApp::setup(){
 	gameManager = new GameManager(GAME_MENU); // Tudo comecara no menu
 
 	gameMenu = new GameMenu();
-	gameConfigs = new GameConfigs();
+	gameWin = new GameWin();
 	gamePlay = new GamePlay(gameManager);
 	gameOver = new GameOver();
-
+	
 }
 
 //--------------------------------------------------------------
@@ -22,8 +22,8 @@ void ofApp::update(){
 	case GAME_MENU:
 		gameMenu->update(gameManager);
 		break;
-	case GAME_CONFIG:
-		gameConfigs->update(gameManager);
+	case GAME_WIN:
+		gameWin->update(gameManager);
 		break;
 	case GAME_PLAY:
 		gamePlay->update(gameManager);
@@ -31,6 +31,13 @@ void ofApp::update(){
 	case GAME_OVER:
 		gameOver->update(gameManager);
 		break;
+	case GAME_RESET:
+		gameMenu->reset();
+		gamePlay->reset(gameManager);
+		gameOver->reset();
+		gameManager->gameState = GAME_MENU;
+		break;
+
 	}
 	
 	// Se passou por todos os updates e ninguem usou o clique do mouse, anula o BOOL para simular um clique 
@@ -43,13 +50,13 @@ void ofApp::draw(){
 	switch (gameManager->gameState)
 	{
 	case GAME_MENU:
-		gameMenu->draw();
+		gameMenu->draw(gameManager);
 		break;
-	case GAME_CONFIG:
-		gameConfigs->draw();
+	case GAME_WIN:
+		gameWin->draw(gameManager);
 		break;
 	case GAME_PLAY:
-		gamePlay->draw();
+		gamePlay->draw(gameManager);
 		break;
 	case GAME_OVER:
 		gameOver->draw();
@@ -61,7 +68,14 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+	if (key == OF_KEY_F4)
+	{
+		gameManager->power -= 10;
+	}
+	if (key == OF_KEY_F3)
+	{
+		gameManager->m_horas += 1;
+	}
 }
 
 //--------------------------------------------------------------
@@ -81,7 +95,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	gameManager->mouseFoiPressionado = true;
+		gameManager->mouseFoiPressionado = true;
 
 }
 
