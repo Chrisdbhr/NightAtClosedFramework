@@ -266,3 +266,4 @@ Release
 *.vbproj.user
 ipch
 *sdf
+.idea
