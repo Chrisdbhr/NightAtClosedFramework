@@ -25,7 +25,7 @@ void Monster::reset()
 	animTempo = 0.04f; //Contador de tempo decorrido da animacao
 
 	m_wait = 100.f; // Tempo de espera entre acoes (Deve começar com 100.f para demorar para começar a agir)
-	tempoParaDarGameOver = 1.1f; //Quanto tempo com o monstro na tela para dar GameOver
+	tempoParaDarGameOver = 0.75f; //Quanto tempo com o monstro na tela para dar GameOver
 }
 
 void Monster::update(GameManager *game)
