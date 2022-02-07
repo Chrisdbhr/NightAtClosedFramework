@@ -68,14 +68,17 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == OF_KEY_F4)
-	{
-		gameManager->power -= 10;
-	}
-	if (key == OF_KEY_F3)
-	{
+	switch (key){
+	case OF_KEY_F2:
 		gameManager->m_horas += 1;
-	}
+	case OF_KEY_F3:
+		gameManager->power -= 10;
+	case OF_KEY_F4:
+	case 'F':
+	case 'f':
+		ofToggleFullscreen();
+		break;
+	};
 }
 
 //--------------------------------------------------------------
@@ -117,7 +120,7 @@ void ofApp::mouseExited(int x, int y){
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 
-	ofSetWindowShape(WINDOW_WIDTH, WINDOW_HEIGHT);
+	//ofSetWindowShape(w, h);
 }
 
 //--------------------------------------------------------------
